@@ -5,3 +5,12 @@
     box-sizing: border-box;
     font-family: "Gotham-Black";
 }
+.container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+}
+.medium{
+    display: flex;
+    flex-direction: column;
+}
