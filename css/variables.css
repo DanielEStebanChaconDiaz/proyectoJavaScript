@@ -1,0 +1,10 @@
+:root{
+    --clr-green-primary: #1db954;
+    --clr-green-secondary: #1ed760;
+    --clr-black: #191414;
+    --clr-white: #fff;
+}
+font-face {
+    font-family: "Gotham-Black";
+    src: url(../storage/Spotify-Font/Gotham-Black.otf);
+}
