@@ -18,3 +18,8 @@ class myframe extends HTMLElement{
     }
 }
 customElements.define("my-frame",myframe)
+
+const listarAlbum = document.querySelector("#listarAlbum")
+let URL = `https://spotify23.p.rapidapi.com/albums/`
+let [data] = await fetch(URL)
+const randomElement = data[Math.floor(Math.random() * data.length)];
