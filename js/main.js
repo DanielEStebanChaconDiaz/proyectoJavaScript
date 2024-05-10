@@ -20,6 +20,56 @@ class myframe extends HTMLElement{
 customElements.define("my-frame",myframe)
 
 const listarAlbum = document.querySelector("#listarAlbum")
-let URL = `https://spotify23.p.rapidapi.com/albums/`
-let [data] = await fetch(URL)
-const randomElement = data[Math.floor(Math.random() * data.length)];
+
+let url = 'https://spotify23.p.rapidapi.com/search/?q=%3CREQUIRED%3E&type=albums&offset=0&limit=10&numberOfTopResults=5';
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '825f52aba2mshe0fbee31a795561p1004bbjsn81f444926bbe',
+		'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
+	}
+};
+
+try {
+	const response = await fetch(url, options);
+	const result = await response.json();
+    let va = result.albums.items
+    for(let i = 0; i < 1000; i++){
+        fetch (url)
+        .then(response => response.json())
+        .then(data => mostrarAlbum(data))
+        let imagen = result.albums.items[i]?.data.coverArt.sources[i]?.url ?? 'https://i.scdn.co/image/ab67616d00001e02441084621edb7c53ef303090';
+        let nombre = result.albums.items[i].data.name
+        try {
+            var nombreArtista = result.albums.items[i].data.artists.items[i].profile.name;
+            // Código adicional que depende de nombreArtista
+        } catch (error) {
+            // Manejo de errores
+            console.error("Hubo un error al acceder al nombre del artista:", error);
+        }
+        let fecha = result.albums.items[i].data.date.year
+        
+        const mostrarAlbum = async () => {
+            const div = document.createElement("div");
+            div.classList.add("album")
+            div.innerHTML = `
+            <div class="album">
+                <div class="album_order">
+                    <div class="imagen_album">
+                        <img src="${imagen}" alt="" class="portada">
+                    </div>
+                    <div class="info_album">
+                        <h3>${nombre}</h3>
+                        <p>${nombreArtista}</p>
+                        <p>${fecha}</p>
+                    </div>
+                </div>
+            </div>`;
+            listarAlbum.append(div);
+        }
+        if(imagen){
+        }
+    }
+} catch (error) {
+	console.error(error);
+}
