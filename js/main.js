@@ -38,15 +38,9 @@ try {
         fetch (url)
         .then(response => response.json())
         .then(data => mostrarAlbum(data))
-        let imagen = result.albums.items[i]?.data.coverArt.sources[i]?.url ?? 'https://i.scdn.co/image/ab67616d00001e02441084621edb7c53ef303090';
+        let imagen = result.albums.items[i]?.data.coverArt.sources[i]?.url ?? result.albums.items[i]?.data.coverArt.sources[0]?.url;
         let nombre = result.albums.items[i].data.name
-        try {
-            var nombreArtista = result.albums.items[i].data.artists.items[i].profile.name;
-            // Código adicional que depende de nombreArtista
-        } catch (error) {
-            // Manejo de errores
-            console.error("Hubo un error al acceder al nombre del artista:", error);
-        }
+        let nombreArtista = result.albums.items[i].data.artists.items[i]?.profile.name ?? result.albums.items[i].data.artists.items[0]?.profile.name;
         let fecha = result.albums.items[i].data.date.year
         
         const mostrarAlbum = async () => {
