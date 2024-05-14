@@ -36,19 +36,25 @@ try {
         fetch (url)
         .then(response => response.json())
         .then(data => mostrarAlbum(data))
-        let imagen = result.albums.items[i]?.data.coverArt.sources[i]?.url ?? result.albums.items[i]?.data.coverArt.sources[0]?.url;
+        .then(data => escucharAlbum(data))
+        const getImage = result.albums.items[i]?.data.coverArt.sources[i]?.url;
+        const firstImage = result.albums.items[i]?.data.coverArt.sources[0]?.url;
+
+        let imagen = getImage ?? firstImage;
         let nombre = result.albums.items[i].data.name
         let nombreArtista = result.albums.items[i].data.artists.items[i]?.profile.name ?? result.albums.items[i].data.artists.items[0]?.profile.name;
         let fecha = result.albums.items[i].data.date.year
+        let uri = result.albums.items[i].data.uri
         
         const mostrarAlbum = async () => {
-            const div = document.createElement("div");
+            const searchHeader = document.querySelector(".search-header")
+            const div = document.createElement("fragment");
             div.classList.add("album")
-            div.innerHTML = `
+            searchHeader.after += `
             <div class="album">
-                <div class="album_order">
+                <div class="album_order" data-id="${uri}">
                     <div class="imagen_album">
-                        <img src="${imagen}" alt="" class="portada">
+                        <img src="${imagen}" alt="" class="portada"">
                     </div>
                     <div class="info_album">
                         <h3>${nombre}</h3>
@@ -59,9 +65,18 @@ try {
             </div>`;
             listarAlbum.append(div);
         }
-        if(imagen){
+        const escucharAlbum = async () => {
+            const div =document.createElement("div");
+            div.classList.add("frame");
+            div.innerHTML=`
+            <my-frame uri="${uri}" class="frame"></my-frame>`
+            listarAlbum.append(div)
         }
     }
 } catch (error) {
 	console.error(error);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    mostrarAlbum();
+})
