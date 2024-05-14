@@ -19,13 +19,11 @@ class myframe extends HTMLElement{
 }
 customElements.define("my-frame",myframe)
 
-const listarAlbum = document.querySelector("#listarAlbum")
-
-let url = 'https://spotify23.p.rapidapi.com/search/?q=%3CREQUIRED%3E&type=albums&offset=0&limit=10&numberOfTopResults=5';
+const url = 'https://spotify23.p.rapidapi.com/search/?q=%3CREQUIRED%3E&type=album&offset=0&limit=10&numberOfTopResults=5';
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '825f52aba2mshe0fbee31a795561p1004bbjsn81f444926bbe',
+		'X-RapidAPI-Key': '6275bafd33mshb8de4d750097a4fp1e70bcjsne2bdaa25c18e',
 		'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
 	}
 };

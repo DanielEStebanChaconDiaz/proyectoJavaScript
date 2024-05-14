@@ -15,6 +15,7 @@
     width: 100%;
     padding: 2%;
     text-align: center;
+    grid-gap: 2%;
 }
 .medium{
     display: flex;
@@ -91,16 +92,26 @@
     flex-direction: column;
 }
 .album_grande{
-    grid-gap: 5%;
+    grid-gap: 2%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4, 1fr);
     height: 70vh;
     width: 100%;
     overflow: auto;
+    align-items: center;
+}
+.album{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 .imagen_album img{
     border-radius: 10%;
+    width: 100%;
+    height: auto;
 }
 ::-webkit-scrollbar{
     width: 10%;
@@ -108,4 +119,14 @@
 .portada{
     width: 80%;
     object-fit: cover;
+}
+.album_order{
+  cursor: pointer;
+  width: 60%;
+  height: auto;
+  padding: 5%;
+}
+.album_order:hover{
+  background: #3a3a3a;
+  border-radius: 10%;
 }
