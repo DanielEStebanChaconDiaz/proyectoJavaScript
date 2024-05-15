@@ -191,3 +191,41 @@ try {
 } catch (error) {
 	console.error(error);
 }
+document.addEventListener("DOMContentLoaded", function() {
+    // Obtener los elementos relevantes del DOM
+    const albumsBtn = document.getElementById("albumsBtn");
+    const tracksBtn = document.getElementById("tracksBtn");
+    const playlistBtn = document.getElementById("playlistBtn");
+    const albumSection = document.getElementById("albumSection");
+    const tracksSection = document.getElementById("tracksSection");
+    const playlistSection = document.getElementById("playlistSection");
+
+    // Función para mostrar la sección de álbumes y ocultar las demás
+    function showAlbums() {
+        albumSection.classList.remove("hide");
+        tracksSection.classList.add("hide");
+        playlistSection.classList.add("hide");
+    }
+
+    // Función para mostrar la sección de tracks y ocultar las demás
+    function showTracks() {
+        albumSection.classList.add("hide");
+        tracksSection.classList.remove("hide");
+        playlistSection.classList.add("hide");
+    }
+
+    // Función para mostrar la sección de playlist y ocultar las demás
+    function showPlaylist() {
+        albumSection.classList.add("hide");
+        tracksSection.classList.add("hide");
+        playlistSection.classList.remove("hide");
+    }
+
+    // Asignar eventos de clic a los botones de navegación
+    albumsBtn.addEventListener("click", showAlbums);
+    tracksBtn.addEventListener("click", showTracks);
+    playlistBtn.addEventListener("click", showPlaylist);
+
+    // Mostrar la sección de álbumes al cargar la página
+    showAlbums();
+});
