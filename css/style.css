@@ -8,7 +8,7 @@
 }
 .container{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 2fr 1fr;
     justify-items: center;
     background: var(--clr-black);
     height: 100vh;
@@ -16,6 +16,15 @@
     padding: 2%;
     text-align: center;
     grid-gap: 2%;
+}
+.title{
+  width: 100%;
+  border-radius: 25px;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--clr-gray);
 }
 .medium{
     display: flex;
@@ -29,6 +38,7 @@
     text-align: center;
     margin-top: 2%;
     margin-bottom: 5%;
+    width: 100%;
   }
   
   .search-header__input {
@@ -90,16 +100,23 @@
 .contenedor{
     display: flex;
     flex-direction: column;
+    background: var(--clr-gray);
+    border-radius: 25px;
+    padding: 5%;
+}
+.topChart{
+  margin-bottom: 2%;
 }
 .album_grande{
-    grid-gap: 2%;
+    grid-gap: 5%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    height: 70vh;
+    height: 45vh;
     width: 100%;
     overflow: auto;
     align-items: center;
+    text-transform: uppercase;
 }
 .album{
   display: flex;
@@ -117,16 +134,24 @@
     width: 10%;
 }
 .portada{
-    width: 80%;
+    width: 100%;
     object-fit: cover;
 }
-.album_order{
+.album_order, .track_order{
   cursor: pointer;
-  width: 60%;
+  width: 100%;
   height: auto;
   padding: 5%;
 }
-.album_order:hover{
+.album_order:hover, .track_order:hover{
   background: #3a3a3a;
   border-radius: 10%;
+}
+
+@media (width < 800px){
+  .container{
+    grid-template-columns: 1fr;
+    width: 100%;
+    height: 100vh;
+  }
 }

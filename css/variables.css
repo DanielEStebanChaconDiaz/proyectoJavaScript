@@ -3,6 +3,7 @@
     --clr-green-secondary: #1ed760;
     --clr-black: #191414;
     --clr-white: #fff;
+    --clr-gray: rgba(32, 32, 32, 0.267);
 }
 font-face {
     font-family: "Gotham-Black";
