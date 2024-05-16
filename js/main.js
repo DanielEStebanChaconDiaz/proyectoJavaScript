@@ -26,7 +26,7 @@ class MyFrame extends HTMLElement {
         `;
         if (type == "track"){
             this.shadowRoot.innerHTML = `
-            <iframe class="spotify-iframe" width="50%" height="400" src="https://open.spotify.com/embed/${this.type}/${this.id}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            <iframe class="spotify-iframe" width="70%" height="400" src="https://open.spotify.com/embed/${this.type}/${this.id}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
         `;
         }
     }
@@ -190,4 +190,4 @@ try {
     }
 } catch (error) {
 	console.error(error);
-}
+};
