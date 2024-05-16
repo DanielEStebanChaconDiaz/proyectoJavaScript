@@ -65,7 +65,7 @@ async function mostrarAlbums(code) {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '60c0b8f59bmshb8d3920516e1c27p15151djsn79cfdb969902',
+            'X-RapidAPI-Key': '39b6e55d38msh8fdabe584af59cfp1f959bjsn348b230a42b1',
             'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
         }
 };
@@ -83,6 +83,7 @@ async function mostrarAlbums(code) {
             const nombreArtista = albums[i].data.artists.items[i]?.profile.name ?? albums[i].data.artists.items[0]?.profile.name;
             const fecha = albums[i].data.date.year;
             const uri = albums[i].data.uri;
+            // const uri2 = albums[i].tracks.items[i].uri
 
             const div = document.createElement("div");
             div.classList.add("album");
@@ -103,16 +104,20 @@ async function mostrarAlbums(code) {
                 const frame = document.querySelector("my-frame");
                 frame.setAttribute("uri", uri);
             });
+            // div.querySelector('.album_order').addEventListener('click', () =>{
+            //     const trackAlbum = document.querySelector("#listarTrack")
+            //     trackAlbum.setAttribute("uri", uri2);
+            // })
         }
     } catch (error) {
         console.error(error);
     }
 };
-const url = 'https://spotify23.p.rapidapi.com/recommendations/?limit=20&seed_tracks=0c6xIDDpzE81m2q797ordA&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry';
+const url = `https://spotify23.p.rapidapi.com/recommendations/?limit=20&seed_tracks=0c6xIDDpzE81m2q797ordA&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry`;
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '60c0b8f59bmshb8d3920516e1c27p15151djsn79cfdb969902',
+		'X-RapidAPI-Key': '39b6e55d38msh8fdabe584af59cfp1f959bjsn348b230a42b1',
 		'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
 	}
 };
@@ -128,9 +133,8 @@ try {
         const nombre = tracks[i].name;
         const nombreArtista = tracks[i].artists[0].name
         const uri = tracks[i].uri;
-        console.log(img)
         const div = document.createElement("div");
-        div.classList.add("trackRecomendations");
+        div.classList.add("track_Recomendations");
         div.innerHTML = `
             <div class="track_order" data-id="${uri}">
                 <div class="imagen_track">
@@ -155,7 +159,7 @@ const url2 = 'https://spotify23.p.rapidapi.com/playlist_tracks/?id=37i9dQZF1DX4W
 const options2 = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '60c0b8f59bmshb8d3920516e1c27p15151djsn79cfdb969902',
+		'X-RapidAPI-Key': '39b6e55d38msh8fdabe584af59cfp1f959bjsn348b230a42b1',
 		'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
 	}
 };

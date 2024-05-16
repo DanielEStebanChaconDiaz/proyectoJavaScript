@@ -6,6 +6,7 @@
     <title>Spotify</title>
     <link rel="stylesheet" href="css/style.css">
     <script type="module" src="js/main.js" defer></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <main class="container">
@@ -77,16 +78,58 @@
             
             <div class="track_music">
                 
-            <div class="track_recomendation" id = "listarTrack">
+            <div class="track_Recomendation" id = "listarTrack">
                 
             </div>
             </div>
         </aside>
-        <footer class="nav">
-            <button id="albumsBtn">Albums</button>
-            <button id="tracksBtn">Tracks</button>
-            <button id="playlistBtn">Playlist</button>
+        <footer class="menu__mobile">
+            <button onclick="mostrarColumna(1)">
+                <i class='bx bx-home-alt'></i>
+               
+            </button>
+            <button onclick="mostrarColumna(2)">
+                <i class='bx bx-album' ></i>
+    
+            </button>
+            <button onclick="mostrarColumna(3)">
+                <i class='bx bx-menu' ></i>
+    
+            </button>
+    
         </footer>
+        <script class="script">
+            function ocultarTodasLasColumnas() {
+                var left = document.querySelectorAll('.left');
+                left.forEach(function(element) {
+                    element.style.display = 'none';
+                });
+                var medium = document.querySelectorAll('.medium');
+                medium.forEach(function(element) {
+                    element.style.display = 'none';
+                });
+                var right = document.querySelectorAll('.right');
+                right.forEach(function(element) {
+                    element.style.display = 'none';
+                });
+            }
+    
+            function mostrarColumna(columna) {
+                ocultarTodasLasColumnas();
+                var columnaClase;
+                if (columna === 1) {
+                    columnaClase = 'left';
+                } else if (columna === 2) {
+                    columnaClase = 'medium';
+                } else if (columna === 3) {
+                    columnaClase = 'right';
+                }
+                var columnaAMostrar = document.getElementsByClassName(columnaClase);
+                Array.from(columnaAMostrar).forEach(function(element) {
+                    element.style.display = 'flex';
+                });
+            }
+        </script>
     </main>
 </body>
 </html>

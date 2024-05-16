@@ -189,7 +189,7 @@ my-frame{
   height: 10vh;
 
 }
-.track_recomendation{
+.track_recomendation, .track_Recomendation{
   padding: 2%;
   height: 70vh;
   border-radius: 25px;
@@ -223,12 +223,15 @@ my-frame{
   width: 100%;
   justify-content: center;
 }
-.track_recomendation h3 {
+.track_recomendation h3, .track_Recomendation h3 {
   font-size: .9rem;
   margin-bottom: 1rem;
   color: var(--clr-white);
 }
-.nav{
+.menu__mobile{
+  display: none;
+}
+.script{
   display: none;
 }
 @media (width < 800px){
@@ -240,22 +243,29 @@ my-frame{
   }
   .right{
     display: none;
-    height: 62vh;
+    height: 57vh;
   }
   .medium{
     display: none;
   }
-  .trackRecomendations{
-    display: none;
+  .track_Recomendation{
     height: 62vh;
   }
+  .trackRecomendations{
+    display: none;
+    height: 57vh;
+  }
   .album_grande{
-    height: 62vh;
+    height: 57vh;
   }
   ::-webkit-scrollbar{
     display: none;
   }
-  .nav{
+  .menu__mobile button{
+    background: transparent;
+    border: none;
+  }
+  .menu__mobile{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     position: absolute;
@@ -263,17 +273,24 @@ my-frame{
     width: 92%;
     height: 5vh;
     grid-gap: 1rem;
-    background: var(--clr-gray);
     border-radius: 100vmax;
     padding: 2%;
   }
-  .nav button{
+  .menu__mobile i{
     background: var(--clr-green-primary);
     border-radius: 100vmax;
     width: 100%;
     color: var(--clr-black);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
   }
-  .nav button:hover{
+  .menu__mobile i:hover{
     background: var(--clr-green-secondary);
+  }
+  .left header, .right header, .title{
+    height: 23vh;
   }
 }
