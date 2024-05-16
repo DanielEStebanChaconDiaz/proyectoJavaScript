@@ -293,4 +293,7 @@ my-frame{
   .left header, .right header, .title{
     height: 23vh;
   }
+  my-frame{
+    height: 57vh;
+  }
 }

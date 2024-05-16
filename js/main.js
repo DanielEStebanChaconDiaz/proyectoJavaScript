@@ -22,7 +22,7 @@ class MyFrame extends HTMLElement {
         this.id = id;
         this.type = type;
         this.shadowRoot.innerHTML = `
-            <iframe class="spotify-iframe" width="100%" height="750" src="https://open.spotify.com/embed/${this.type}/${this.id}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            <iframe class="spotify-iframe" width="100%" height="100%" src="https://open.spotify.com/embed/${this.type}/${this.id}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
         `;
         if (type == "track"){
             this.shadowRoot.innerHTML = `
