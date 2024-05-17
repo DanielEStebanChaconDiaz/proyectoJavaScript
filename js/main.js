@@ -63,7 +63,7 @@ async function mostrarAlbums(code) {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '39b6e55d38msh8fdabe584af59cfp1f959bjsn348b230a42b1',
+            'X-RapidAPI-Key': '2057b038e1msha82feb3472c16f6p1bc6a8jsn67d5759cb0ea',
             'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
         }
     };
@@ -114,7 +114,7 @@ async function reproducirPrimerTrack(albumUri){
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '39b6e55d38msh8fdabe584af59cfp1f959bjsn348b230a42b1',
+            'X-RapidAPI-Key': '2057b038e1msha82feb3472c16f6p1bc6a8jsn67d5759cb0ea',
             'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
         }
     };
@@ -137,7 +137,7 @@ async function mostrarTracks(albumUri) {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '39b6e55d38msh8fdabe584af59cfp1f959bjsn348b230a42b1',
+            'X-RapidAPI-Key': '2057b038e1msha82feb3472c16f6p1bc6a8jsn67d5759cb0ea',
             'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
         }
     };
@@ -187,7 +187,7 @@ const urlRecommendations = `https://spotify23.p.rapidapi.com/recommendations/?li
 const optionsRecommendations = {
     method: 'GET',
     headers: {
-        'X-RapidAPI-Key': '39b6e55d38msh8fdabe584af59cfp1f959bjsn348b230a42b1',
+        'X-RapidAPI-Key': '2057b038e1msha82feb3472c16f6p1bc6a8jsn67d5759cb0ea',
         'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
     }
 };
@@ -207,7 +207,8 @@ try {
         div.classList.add("track_Recomendations");
         div.innerHTML = `
             <div class="track_order" data-id="${uri}">
-            <i class='bx bx-menu-alt-left' style='color:#1db954' ></i>
+            <p class="num">${i+1}</p>
+            <i class='bx bx-play'></i>
                 <div class="imagen_track">
                     <img src="${imagen}" alt="" class="portada">
                 </div>
@@ -227,28 +228,29 @@ try {
     console.error(error);
 }
 
-const urlPlaylists = 'https://spotify23.p.rapidapi.com/search/?q=%3CREQUIRED%3E&type=playlist&offset=0&limit=10&numberOfTopResults=5';
-const optionsPlaylists = {
-    method: 'GET',
-    headers: {
-        'X-RapidAPI-Key': '39b6e55d38msh8fdabe584af59cfp1f959bjsn348b230a42b1',
-        'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
-    }
+const url = 'https://spotify23.p.rapidapi.com/search/?q=%3CREQUIRED%3E&type=playlists&offset=0&limit=10&numberOfTopResults=5';
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '2057b038e1msha82feb3472c16f6p1bc6a8jsn67d5759cb0ea',
+		'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
+	}
 };
 
 try {
-    const response = await fetch(urlPlaylists, optionsPlaylists);
+    const response = await fetch(url, options);
     const result = await response.json();
-    const playlist = result.items;
     for (let i = 0; i < 10; i++) {
-        const img = playlist[i]?.track.album?.images[0].url;
+        const img = result.playlist.items[i].data.images.items[0].sources[0].url;
         const imagen = img;
-        const nombre = playlist[i].track.album.name;
-        const uri = playlist[i].track.album.uri;
+        const nombre = result.playlist.items[i].data.name;
+        const uri = result.playlist.items[i].data.uri;
         const div = document.createElement("div");
         div.classList.add("PlayList");
         div.innerHTML = `
             <div class="track_order" data-id="${uri}">
+            <p class="num">${i+1}</p>
+            <i class='bx bx-play'></i>
                 <div class="imagen_playlist">
                     <img src="${imagen}" alt="" class="portada">
                 </div>
@@ -265,4 +267,74 @@ try {
     }
 } catch (error) {
     console.error(error);
+}
+const checkbox = document.getElementById('toggleColorsCheckbox');
+const containers = document.querySelectorAll('.container');
+const search = document.querySelectorAll('.search-header__input');
+const leftHeaders = document.querySelectorAll('.left header');
+const mediumHeaders = document.querySelectorAll('.medium header');
+const rightHeaders = document.querySelectorAll('.right header');
+const titles = document.querySelectorAll('.title');
+const contenedores = document.querySelectorAll('.contenedor');
+const trackMusic = document.querySelectorAll('.track_music');
+const albumOrders = document.querySelectorAll('.album_order');
+const trackOrders = document.querySelectorAll('.track_order');
+const iframe = document.querySelectorAll('.iframe');
+const movile = document.querySelectorAll('.menu__mobile');
+
+checkbox.addEventListener('change', function() {
+    if (this.checked) {
+        setStyles(containers, '#f3f3f3', '#191414');
+        setStyles(search, 'white', '#191414');
+        setStyles(leftHeaders, '#ececec', '#191414');
+        setStyles(mediumHeaders, '#ececec', '#191414');
+        setStyles(rightHeaders, '#ececec', '#191414');
+        setStyles(titles, '#ececec', '#191414');
+        setStyles(contenedores, '#ececec', '#191414');
+        setStyles(trackMusic, '#ececec', '#191414');
+        setStyles(iframe, '#ececec', '#191414');
+        setStyles(movile, '#ececec', '#191414');
+        addHoverStyles(albumOrders);
+        addHoverStyles(trackOrders);
+    } else {
+        resetStyles(containers);
+        resetStyles(search);
+        resetStyles(leftHeaders);
+        resetStyles(mediumHeaders);
+        resetStyles(rightHeaders);
+        resetStyles(titles);
+        resetStyles(contenedores);
+        resetStyles(trackMusic);
+        resetStyles(iframe);
+        resetStyles(movile);
+        removeHoverStyles(albumOrders);
+        removeHoverStyles(trackOrders);
+        removeHoverStyles(iframe);
+    }
+});
+
+function setStyles(elements, backgroundColor, color) {
+    elements.forEach(function(element) {
+        element.style.background = backgroundColor;
+        element.style.color = color;
+    });
+}
+
+function resetStyles(elements) {
+    elements.forEach(function(element) {
+        element.style.background = '';
+        element.style.color = '';
+    });
+}
+
+function addHoverStyles(elements) {
+    elements.forEach(function(element) {
+        element.classList.add('hover-active');
+    });
+}
+
+function removeHoverStyles(elements) {
+    elements.forEach(function(element) {
+        element.classList.remove('hover-active');
+    });
 }

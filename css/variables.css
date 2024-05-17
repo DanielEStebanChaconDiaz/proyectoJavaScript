@@ -1,9 +1,12 @@
 :root{
-    --clr-green-primary: #1db954;
-    --clr-green-secondary: #1ed760;
+    --clr-green-primary: #1ed760;
+    --clr-green-secondary: #1db954;
     --clr-black: #191414;
+    --clr-gray-secondary: rgba(121, 121, 121, 0.267);
     --clr-white: #fff;
     --clr-gray: rgba(32, 32, 32, 0.267);
+    --clr-gray-movile: #f3f3f3;
+    --clr-gray-movile-secondary: #ececec;
 }
 font-face {
     font-family: "Gotham-Black";
