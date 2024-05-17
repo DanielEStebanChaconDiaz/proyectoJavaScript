@@ -1,15 +1,11 @@
 class MyFrame extends HTMLElement {
     id
-
     constructor() {
         super();
         this.attachShadow({ mode: "open" });
     }
 
-    connectedCallback() {
-        // Este método se llama cuando el elemento se conecta al DOM
-        // Aquí puedes inicializar elementos, establecer eventos, etc.
-    }
+    connectedCallback() {}
 
     static get observedAttributes() {
         return ["uri"];
@@ -36,8 +32,10 @@ customElements.define("my-frame", MyFrame);
 const searchInput = document.querySelector('.search-header__input');
 const searchButton = document.querySelector('.search-header__button');
 
-// Llamar a mostrarAlbums con el valor inicial de code al cargar la página
-let code = "%3CREQUIRED%3E";
+const codes = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+const randomCode = codes[Math.floor(Math.random() * codes.length)];
+const code = randomCode.replace(" ", "%20");
+
 document.addEventListener('DOMContentLoaded', () => {
     mostrarAlbums(code);
 });
@@ -45,8 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
 searchButton.addEventListener('click', () => {
     const query = searchInput.value.trim();
     if (query) {
-        code = query.replace(" ", "%20");
-        mostrarAlbums(code);
+        const formattedQuery = query.replace(" ", "%20");
+        mostrarAlbums(formattedQuery);
     }
 });
 
@@ -54,8 +52,8 @@ searchInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         const query = searchInput.value.trim();
         if (query) {
-            code = query.replace(" ", "%20");
-            mostrarAlbums(code);
+            const formattedQuery = query.replace(" ", "%20");
+            mostrarAlbums(formattedQuery);
         }
     }
 });
@@ -100,14 +98,15 @@ async function mostrarAlbums(code) {
             `;
             listarAlbum.append(div);
             div.querySelector('.album_order').addEventListener('click', async () => {
-                await reproducirPrimerTrack(uri); // Espera a que se reproduzca el primer track
-                mostrarTracks(uri); // Mostrar los tracks del álbum
+                await reproducirPrimerTrack(uri);
+                mostrarTracks(uri);
             });
         }
     } catch (error) {
         console.error(error);
     }
 }
+
 
 async function reproducirPrimerTrack(albumUri){
     let albumId = albumUri.split(":")[2];
@@ -124,9 +123,9 @@ async function reproducirPrimerTrack(albumUri){
         const response = await fetch(url, options);
         const result = await response.json();
         const tracks = result.albums[0].tracks.items;
-        const uri = tracks[0]?.uri; // URI del primer track
+        const uri = tracks[0]?.uri; 
         const frame = document.querySelector("my-frame");
-        frame.setAttribute("uri", uri); // Establecer la URI del primer track
+        frame.setAttribute("uri", uri); 
     } catch (error) {
         console.error(error);
     }
@@ -153,11 +152,16 @@ async function mostrarTracks(albumUri) {
             const nombre = track.name;
             const nombreArtista = track.artists[0].name;
             const uri = track.uri;
+            const imagen = result.albums[0].images[0].url
 
             const div = document.createElement("div");
             div.classList.add("track");
             div.innerHTML = `
                 <div class="track_order" data-id="${uri}">
+                    <div class="imagen_track">
+                    <i class='bx bx-menu-alt-left' style='color:#1db954' ></i>
+                        <img src="${imagen}" alt="" class="portada">
+                    </div>
                     <div class="info_track">
                         <h3>${nombre}</h3>
                         <p>${nombreArtista}</p>
@@ -175,14 +179,11 @@ async function mostrarTracks(albumUri) {
     }
 }
 
-
-// Código para mostrar recomendaciones y playlist (sin cambios significativos)
-
 const listarAlbum = document.querySelector('#listarAlbum');
 const listarTrack = document.querySelector('#listarTrack');
 const listarPlayList = document.querySelector('#listarPlayList');
 
-const urlRecommendations = `https://spotify23.p.rapidapi.com/recommendations/?limit=20&seed_tracks=0c6xIDDpzE81m2q797ordA&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry`;
+const urlRecommendations = `https://spotify23.p.rapidapi.com/recommendations/?limit=20&seed_tracks=0c6xIDDpzE81m2q797ordA&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed`
 const optionsRecommendations = {
     method: 'GET',
     headers: {
@@ -206,6 +207,7 @@ try {
         div.classList.add("track_Recomendations");
         div.innerHTML = `
             <div class="track_order" data-id="${uri}">
+            <i class='bx bx-menu-alt-left' style='color:#1db954' ></i>
                 <div class="imagen_track">
                     <img src="${imagen}" alt="" class="portada">
                 </div>
@@ -225,7 +227,7 @@ try {
     console.error(error);
 }
 
-const urlPlaylists = 'https://spotify23.p.rapidapi.com/playlist_tracks/?id=37i9dQZF1DX4Wsb4d7NKfP&offset=0&limit=100';
+const urlPlaylists = 'https://spotify23.p.rapidapi.com/search/?q=%3CREQUIRED%3E&type=playlist&offset=0&limit=10&numberOfTopResults=5';
 const optionsPlaylists = {
     method: 'GET',
     headers: {
