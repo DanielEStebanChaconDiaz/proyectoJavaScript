@@ -63,7 +63,7 @@ async function mostrarAlbums(code) {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': 'f39f63f611msh8bc0f870d3507dap1ccbeajsn30cb22305b23',
+            'X-RapidAPI-Key': 'c380036f55mshc9a37bd494c0308p112bebjsn084363a94d80',
             'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
         }
     };
@@ -113,7 +113,7 @@ async function reproducirPrimerTrack(albumUri) {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': 'f39f63f611msh8bc0f870d3507dap1ccbeajsn30cb22305b23',
+            'X-RapidAPI-Key': 'c380036f55mshc9a37bd494c0308p112bebjsn084363a94d80',
             'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
         }
     };
@@ -136,7 +136,7 @@ async function mostrarTracks(albumUri) {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': 'f39f63f611msh8bc0f870d3507dap1ccbeajsn30cb22305b23',
+            'X-RapidAPI-Key': 'c380036f55mshc9a37bd494c0308p112bebjsn084363a94d80',
             'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
         }
     };
@@ -207,7 +207,7 @@ async function buscarTrack(code) {
     const optionsRecommendations = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': 'f39f63f611msh8bc0f870d3507dap1ccbeajsn30cb22305b23',
+            'X-RapidAPI-Key': 'c380036f55mshc9a37bd494c0308p112bebjsn084363a94d80',
             'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
         }
     };
@@ -250,37 +250,44 @@ async function buscarTrack(code) {
     }
 }
 
-const url = 'https://spotify23.p.rapidapi.com/search/?q=%3CREQUIRED%3E&type=playlists&offset=0&limit=10&numberOfTopResults=5';
-const options = {
+const listarAlbum = document.querySelector('#listarAlbum');
+const listarPlayList = document.querySelector('#listarPlayList');
+
+const urlRecommendations = `https://spotify23.p.rapidapi.com/recommendations/?limit=20&seed_tracks=0c6xIDDpzE81m2q797ordA&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry`;
+const optionsRecommendations = {
     method: 'GET',
     headers: {
-        'X-RapidAPI-Key': 'f39f63f611msh8bc0f870d3507dap1ccbeajsn30cb22305b23',
+        'X-RapidAPI-Key': 'c380036f55mshc9a37bd494c0308p112bebjsn084363a94d80',
         'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
     }
 };
 
 try {
-    const response = await fetch(url, options);
+    const response = await fetch(urlRecommendations, optionsRecommendations);
     const result = await response.json();
+    const tracks = result.tracks;
     for (let i = 0; i < 10; i++) {
-        const img = result.playlist.items[i].data.images.items[0].sources[0].url;
-        const imagen = img;
-        const nombre = result.playlist.items[i].data.name;
-        const uri = result.playlist.items[i].data.uri;
+        const img = tracks[i]?.album.images[0]?.url;
+        const img2 = tracks[i]?.album.images[i]?.url;
+        const imagen = img ?? img2;
+        const nombre = tracks[i].name;
+        const nombreArtista = tracks[i].artists[0].name;
+        const uri = tracks[i].uri;
         const div = document.createElement("div");
-        div.classList.add("PlayList");
-        div.innerHTML = `
-            <div class="track_order" data-id="${uri}">
-            <p class="num">${i + 1}</p>
-            <i class='bx bx-play'></i>
-                <div class="imagen_playlist">
-                    <img src="${imagen}" alt="" class="portada">
+            div.classList.add("track_Recomendations");
+            div.innerHTML = `
+                <div class="track_order" data-id="${uri}">
+                    <p class="num">${i + 1}</p>
+                    <i class='bx bx-play'></i>
+                    <div class="imagen_track">
+                        <img src="${imagen}" alt="" class="portada">
+                    </div>
+                    <div class="info_track">
+                        <h3>${nombre}</h3>
+                        <p>${nombreArtista}</p>
+                    </div>
                 </div>
-                <div class="info_track">
-                    <h3>${nombre}</h3>
-                </div>
-            </div>
-        `;
+            `;
         listarPlayList.append(div);
         div.querySelector('.track_order').addEventListener('click', () => {
             const frame = document.querySelector("my-frame");
