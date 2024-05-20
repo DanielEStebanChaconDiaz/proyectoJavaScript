@@ -1,5 +1,5 @@
 class MyFrame extends HTMLElement {
-    id
+    id;
     constructor() {
         super();
         this.attachShadow({ mode: "open" });
@@ -178,21 +178,24 @@ async function mostrarTracks(albumUri) {
     }
 }
 
+const searchInput2 = document.querySelector('#search-header__input');
+const searchButton2 = document.querySelector('#search-header__button');
+
 document.addEventListener('DOMContentLoaded', () => {
     buscarTrack(code);
 });
 
-searchButton.addEventListener('click', () => {
-    const query = searchInput.value.trim();
+searchButton2.addEventListener('click', () => {
+    const query = searchInput2.value.trim();
     if (query) {
         const formattedQuery = query.replace(" ", "%20");
         buscarTrack(formattedQuery);
     }
 });
 
-searchInput.addEventListener('keypress', (e) => {
+searchInput2.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
-        const query = searchInput.value.trim();
+        const query = searchInput2.value.trim();
         if (query) {
             const formattedQuery = query.replace(" ", "%20");
             buscarTrack(formattedQuery);
@@ -214,7 +217,7 @@ async function buscarTrack(code) {
 
     try {
         const response = await fetch(urlRecommendations, optionsRecommendations);
-        const result = await response.json();
+        const result = await response.json(); // Debugging: Log the result
         const tracks = result.tracks.items;
         listarTrack.innerHTML = '';
         for (let i = 0; i < tracks.length; i++) {
@@ -274,8 +277,8 @@ try {
         const nombreArtista = tracks[i].artists[0].name;
         const uri = tracks[i].uri;
         const div = document.createElement("div");
-            div.classList.add("track_Recomendations");
-            div.innerHTML = `
+        div.classList.add("track_Recomendations");
+        div.innerHTML = `
                 <div class="track_order" data-id="${uri}">
                     <p class="num">${i + 1}</p>
                     <i class='bx bx-play'></i>
@@ -297,6 +300,7 @@ try {
 } catch (error) {
     console.error(error);
 }
+
 const checkbox = document.getElementById('toggleColorsCheckbox');
 const containers = document.querySelectorAll('.container');
 const search = document.querySelectorAll('.search-header__input');

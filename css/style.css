@@ -34,7 +34,7 @@
 .search-header {
   display: flex;
   align-items: center;
-  margin-bottom: 1.5rem;
+  /* margin-bottom: 1.5rem; */
 }
 
 .search-header__input {
@@ -86,8 +86,8 @@
     gap: .5rem;
 
 }
-.topChart{
-  margin-bottom: 2%;
+.top1{
+  padding: 2%;
 }
 .album_grande{
     grid-gap: 2%;
@@ -209,6 +209,9 @@
   background: var(--clr-gray);
   border-radius: 25px;
   height: 68vh;
+  padding: 2%;
+}
+.topChart{
   padding: 2%;
 }
 .playlist{
