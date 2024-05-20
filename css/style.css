@@ -139,7 +139,7 @@
   height: auto;
   padding: 5%;
 }
-.album_order.hover-active:hover, .track_order.hover-active:hover{
+.album_order:hover, .track_order:hover{
   background: #3a3a3a;
   border-radius: 25px;
 }
@@ -234,7 +234,7 @@
 .track_recomendation h3, .track_Recomendation h3 {
   font-size: .9rem;
   margin-bottom: 1rem;
-  color: var(--clr-white);
+  /* color: var(--clr-white); */
 }
 .menu__mobile{
   display: none;
@@ -307,6 +307,10 @@
   display: none;
 }
 @media (width < 800px){
+  .album_order:hover, .track_order:hover{
+    background: none;
+    border-radius: 25px;
+  }
   .container, .track_music2{
     grid-template-columns: 1fr;
     width: 100%;
