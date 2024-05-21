@@ -57,7 +57,7 @@ async function mostrarAlbums(code) {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': 'c380036f55mshc9a37bd494c0308p112bebjsn084363a94d80',
+            'X-RapidAPI-Key': 'e7e8051392mshc5c815772c865cdp149bdbjsn3d709158e5ed',
             'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
         }
     };
@@ -107,7 +107,7 @@ async function reproducirPrimerTrack(albumUri) {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': 'c380036f55mshc9a37bd494c0308p112bebjsn084363a94d80',
+            'X-RapidAPI-Key': 'e7e8051392mshc5c815772c865cdp149bdbjsn3d709158e5ed',
             'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
         }
     };
@@ -130,7 +130,7 @@ async function mostrarTracks(albumUri) {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': 'c380036f55mshc9a37bd494c0308p112bebjsn084363a94d80',
+            'X-RapidAPI-Key': 'e7e8051392mshc5c815772c865cdp149bdbjsn3d709158e5ed',
             'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
         }
     };
@@ -196,7 +196,7 @@ async function buscarTrack(code) {
     const optionsRecommendations = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': 'c380036f55mshc9a37bd494c0308p112bebjsn084363a94d80',
+            'X-RapidAPI-Key': 'e7e8051392mshc5c815772c865cdp149bdbjsn3d709158e5ed',
             'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
         }
     };
@@ -204,7 +204,7 @@ async function buscarTrack(code) {
     try {
         const response = await fetch(urlRecommendations, optionsRecommendations);
         const result = await response.json(); // Debugging: Log the result
-        const tracks = result.tracks.items;
+        const tracks = result.tracks?.items;
         listarTrack.innerHTML = '';
         for (let i = 0; i < tracks.length; i++) {
             const track = tracks[i].data;
@@ -244,7 +244,7 @@ const urlRecommendations = `https://spotify23.p.rapidapi.com/recommendations/?li
 const optionsRecommendations = {
     method: 'GET',
     headers: {
-        'X-RapidAPI-Key': 'c380036f55mshc9a37bd494c0308p112bebjsn084363a94d80',
+        'X-RapidAPI-Key': 'e7e8051392mshc5c815772c865cdp149bdbjsn3d709158e5ed',
         'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
     }
 };
