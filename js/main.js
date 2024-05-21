@@ -28,9 +28,10 @@ class MyFrame extends HTMLElement {
     }
 }
 customElements.define("my-frame", MyFrame);
-
+const listarTrack = document.querySelector('#listarTrack');
+const listarAlbum = document.querySelector('#listarAlbum');
+const listarPlayList = document.querySelector('#listarPlayList');
 const searchInput = document.querySelector('.search-header__input');
-const searchButton = document.querySelector('.search-header__button');
 
 const codes = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 const randomCode = codes[Math.floor(Math.random() * codes.length)];
@@ -40,13 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarAlbums(code);
 });
 
-searchButton.addEventListener('click', () => {
-    const query = searchInput.value.trim();
-    if (query) {
-        const formattedQuery = query.replace(" ", "%20");
-        mostrarAlbums(formattedQuery);
-    }
-});
 
 searchInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
@@ -179,19 +173,11 @@ async function mostrarTracks(albumUri) {
 }
 
 const searchInput2 = document.querySelector('#search-header__input');
-const searchButton2 = document.querySelector('#search-header__button');
 
 document.addEventListener('DOMContentLoaded', () => {
     buscarTrack(code);
 });
 
-searchButton2.addEventListener('click', () => {
-    const query = searchInput2.value.trim();
-    if (query) {
-        const formattedQuery = query.replace(" ", "%20");
-        buscarTrack(formattedQuery);
-    }
-});
 
 searchInput2.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
@@ -203,7 +189,7 @@ searchInput2.addEventListener('keypress', (e) => {
     }
 });
 
-const listarTrack = document.querySelector('#listarTrack');
+
 
 async function buscarTrack(code) {
     const urlRecommendations = `https://spotify23.p.rapidapi.com/search/?q=${code}&type=tracks&offset=0&limit=10&numberOfTopResults=5`;
@@ -253,8 +239,6 @@ async function buscarTrack(code) {
     }
 }
 
-const listarAlbum = document.querySelector('#listarAlbum');
-const listarPlayList = document.querySelector('#listarPlayList');
 
 const urlRecommendations = `https://spotify23.p.rapidapi.com/recommendations/?limit=20&seed_tracks=0c6xIDDpzE81m2q797ordA&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry`;
 const optionsRecommendations = {
